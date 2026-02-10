@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>For Maize Thief ❤️</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: url("us.jpg") no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Dark overlay */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.35);
+            z-index: -1;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.88);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            max-width: 90%;
+            z-index: 2;
+        }
+
+        h1 { color: #e63946; }
+
+        button {
+            padding: 12px 20px;
+            margin: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        #yes {
+            background-color: #38b000;
+            color: white;
+        }
+
+        #no {
+            background-color: #e63946;
+            color: white;
+            position: absolute;
+        }
+
+        /* 🎊 CONFETTI STYLES */
+        .confetti {
+            position: fixed;
+            top: -10px;
+            width: 10px;
+            height: 14px;
+            opacity: 0.9;
+            animation: fall linear forwards;
+            z-index: 3;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(720deg);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h1>Hi Maize Thief 💕</h1>
+
+    <p>
+        Couldn't have asked for a better picture, would have probably given me away
+    </p>
+
+    <h2>Will you be my Valentine? 🌹</h2>
+
+    <p><em>// Written with ❤️, logic, and zero bugs</em></p>
+
+    <button id="yes" onclick="handleYes()">Yes 😍</button>
+    <button id="no" onmouseover="moveNo()">No 🙃</button>
+</div>
+
+<script>
+    function handleYes() {
+        const formspreeURL = "https://formspree.io/f/xlgwgedw"; 
+        // 🔴 REPLACE WITH YOUR REAL FORMSPREE URL
+
+        // Send notification silently
+        fetch(formspreeURL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                message: "Akpene clicked YES 💖",
+                time: new Date().toLocaleString()
+            })
+        }).catch(() => {});
+
+        // 🎊 CONFETTI
+        launchConfetti();
+
+        // Celebration message
+        setTimeout(() => {
+            document.body.innerHTML = `
+                <div style="text-align:center; margin-top:20%">
+                    <h1 style="color:white;">You know I am still broke right?..too late you can't take it back now😂😂😂😂!!! 🎉❤️</h1>
+                    <p style="font-size:20px; color:white;">
+                        Better pack up some allergy pills😂😂😂<br>
+                        See you on February 13 😌
+                    </p>
+                </div>
+            `;
+        }, 1200);
+    }
+
+    function moveNo() {
+        const x = Math.random() * (window.innerWidth - 100);
+        const y = Math.random() * (window.innerHeight - 50);
+        const noBtn = document.getElementById("no");
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+    }
+
+    function launchConfetti() {
+        const colors = ["#ff595e", "#ffca3a", "#8ac926", "#1982c4", "#6a4c93"];
+
+        for (let i = 0; i < 120; i++) {
+            const confetti = document.createElement("div");
+            confetti.className = "confetti";
+            confetti.style.left = Math.random() * 100 + "vw";
+            confetti.style.backgroundColor =
+                colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.animationDuration =
+                2 + Math.random() * 3 + "s";
+
+            document.body.appendChild(confetti);
+
+            setTimeout(() => confetti.remove(), 5000);
+        }
+    }
+</script>
+
+</body>
+</html>
